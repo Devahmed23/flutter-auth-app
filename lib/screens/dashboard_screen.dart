@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../controllers/auth_controller.dart';
 import 'detail_screen.dart';
 import 'login_screen.dart';
+import 'courses_screen.dart';
 import '../widgets/profile_avatar.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -84,6 +85,14 @@ class DashboardScreen extends StatelessWidget {
             style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
+            icon: const Icon(Icons.book, color: Colors.white),
+            tooltip: 'Courses',
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const CoursesScreen()),
+            ),
+          ),
+          IconButton(
             icon: const Icon(Icons.logout, color: Colors.white),
             tooltip: 'Logout',
             onPressed: () {
@@ -151,14 +160,15 @@ class DashboardScreen extends StatelessWidget {
             Expanded(
               child: ListView.separated(
                 itemCount: subjects.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 12),
+                separatorBuilder: (_, separator) => const SizedBox(height: 12),
                 itemBuilder: (context, index) {
                   final subject = subjects[index];
                   return GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => DetailScreen(subject: subject)),
+                        builder: (_) => DetailScreen(subject: subject),
+                      ),
                     ),
                     child: Container(
                       padding: const EdgeInsets.all(20),
@@ -169,27 +179,36 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Text(subject['icon']!,
-                              style: const TextStyle(fontSize: 34)),
+                          Text(
+                            subject['icon']!,
+                            style: const TextStyle(fontSize: 34),
+                          ),
                           const SizedBox(width: 16),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(subject['name']!,
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16)),
+                                Text(
+                                  subject['name']!,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
                                 const SizedBox(height: 4),
-                                Text(subject['code']!,
-                                    style:
-                                        const TextStyle(color: Colors.grey)),
+                                Text(
+                                  subject['code']!,
+                                  style: const TextStyle(color: Colors.grey),
+                                ),
                               ],
                             ),
                           ),
-                          const Icon(Icons.arrow_forward_ios,
-                              color: Colors.grey, size: 16),
+                          const Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.grey,
+                            size: 16,
+                          ),
                         ],
                       ),
                     ),

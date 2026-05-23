@@ -39,6 +39,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     setState(() => _isLoading = true);
     await Future.delayed(const Duration(milliseconds: 600));
 
+    if (!mounted) return;
+
     Gender gender = Gender.preferNotToSay;
     if (_selectedGender == 'Male') gender = Gender.male;
     if (_selectedGender == 'Female') gender = Gender.female;
@@ -51,17 +53,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
 
     bool success = widget.authController.register(user);
+    if (!mounted) return;
     setState(() => _isLoading = false);
 
     if (success) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('✅ Registered successfully! Please login.'),
           backgroundColor: Colors.green,
         ),
       );
+      if (!mounted) return;
       Navigator.pop(context);
     } else {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('❌ This email is already registered!'),
@@ -146,7 +152,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
               // Gender Dropdown
               DropdownButtonFormField<String>(
-                value: _selectedGender,
+                initialValue: _selectedGender,
                 dropdownColor: const Color(0xFF1A1E3A),
                 style: const TextStyle(color: Colors.white),
                 decoration: _inputStyle('Gender', Icons.people),

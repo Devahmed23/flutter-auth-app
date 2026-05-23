@@ -6,6 +6,27 @@ Flutter multi-screen app with auth and navigation
 A complete multi-screen Flutter application built as part of the 
 Mobile App Development course (CS-461).
 
+## Extension: CRUD API Integration
+
+This extension adds a REST API powered course management screen using **JSONPlaceholder**.
+
+### API Used
+- JSONPlaceholder fake REST API: https://jsonplaceholder.typicode.com/
+
+### Documentation Followed
+- Official guide: https://jsonplaceholder.typicode.com/guide
+
+### CRUD Features
+- **Read:** Fetch and display a list of courses from the API
+- **Create:** Add a new course using `POST`
+- **Update:** Edit a course using `PUT`
+- **Delete:** Remove a course using `DELETE`
+
+### API Architecture
+- API calls are kept inside a dedicated service layer in `lib/services/course_service.dart`
+- Shared state and CRUD actions are managed in `lib/controllers/course_controller.dart`
+- UI screens consume the controller and only handle display and navigation
+
 ## Features
 
 ### Registration Screen
@@ -32,6 +53,13 @@ Mobile App Development course (CS-461).
 - Tap to navigate to subject detail
 - Logout button
 
+### Courses Screen
+- Fetches courses from JSONPlaceholder
+- Shows loading and error states
+- Add, edit, and delete actions
+- Pre-filled edit form for updates
+- Confirmation dialog before delete
+
 ### Detail Screen
 - Subject header and banner
 - Course description
@@ -40,8 +68,10 @@ Mobile App Development course (CS-461).
 ## Architecture
 - Custom Validator Class
 - Controller Layer (business logic separated from UI)
+- Shared course controller for API state handling
 - Enum Implementation (Gender, FormStatus)
 - Model Layer (UserModel)
+- Service Layer for REST API calls
 
 ## Project Structure
 lib/
@@ -54,11 +84,16 @@ lib/
 │   └── app_validators.dart
 ├── controllers/
 │   └── auth_controller.dart
+│   └── course_controller.dart
+├── services/
+│   └── course_service.dart
 └── screens/
 ├── login_screen.dart
 ├── register_screen.dart
 ├── dashboard_screen.dart
-└── detail_screen.dart
+├── detail_screen.dart
+├── courses_screen.dart
+└── course_form_screen.dart
 
 ## How to Run
 ```bash
@@ -70,3 +105,9 @@ flutter run
 - **Name:** Syed Ahmed Khalid
 - **Course:** Mobile Application Development (CS-461)
 - **Submitted to:** Roshana Mughal
+
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)

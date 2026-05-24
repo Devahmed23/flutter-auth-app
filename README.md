@@ -106,6 +106,9 @@ flutter run
 - **Course:** Mobile Application Development (CS-461)
 - **Submitted to:** Roshana Mughal
 
+## Repository Info
+- **Current working branch:** feature/course-api-integration
+
 ![alt text](image.png)
 ![alt text](image-1.png)
 ![alt text](image-2.png)

@@ -107,7 +107,27 @@ flutter run
 - **Submitted to:** Roshana Mughal
 
 ## Repository Info
-- **Current working branch:** feature/course-api-integration
+- **Current working branch:** feature/offline-cache-and-state-management
+
+## Extension: Offline Cache & State Management
+
+This extension adds offline-first behavior, local persistence using Hive, improved state management with `provider`, and a repository layer to separate API and local storage logic.
+
+### Tools & Packages
+- `provider` — state management
+- `hive` and `hive_flutter` — local, lightweight NoSQL storage
+- `http` — REST API calls
+
+### Architecture
+UI → State Management (`CourseController`) → Repository (`CourseRepository`) → API Service (`CourseService`) / Local DB (Hive)
+
+### Offline Approach
+- Fetched courses are saved to a Hive box (`courses`) after successful API calls.
+- When the app cannot reach the API, data is loaded from the local Hive box.
+- Optimistic updates: create/update/delete update UI immediately and rollback on API failure.
+
+### Branch
+- Work for this extension is on `feature/offline-cache-and-state-management`.
 
 ![alt text](image.png)
 ![alt text](image-1.png)

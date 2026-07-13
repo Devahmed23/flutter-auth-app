@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../controllers/course_controller.dart';
 import '../models/course_model.dart';
 import 'course_form_screen.dart';
@@ -11,12 +12,17 @@ class CoursesScreen extends StatefulWidget {
 }
 
 class _CoursesScreenState extends State<CoursesScreen> {
-  final CourseController _controller = CourseController();
+  late final CourseController _controller;
+  bool _didInit = false;
 
   @override
-  void initState() {
-    super.initState();
-    _controller.loadCourses();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_didInit) {
+      _controller = Provider.of<CourseController>(context, listen: false);
+      _controller.loadCourses();
+      _didInit = true;
+    }
   }
 
   Future<void> _handleDelete(int id) async {
